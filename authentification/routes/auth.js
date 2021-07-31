@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const router = express.Router();
 const _ = require('lodash');
 const Joi = require('joi');
+const jwt = require('jsonwebtoken');
 
 router.post('/', async (req, res) => {
 try {
@@ -18,7 +19,9 @@ try {
       const isValidPassword = await bcrypt.compare(req.body.password, user.password);
       if(!isValidPassword)
           return res.status(400).send('Email yoki parol xato0');
-      res.send(true); 
+
+        const token = jwt.sign({_id: user._id}, 'fsdfswfsw@zdgfde');
+      res.header('x-auth-token', token).send(true); 
 } catch (error) {
     console.log(error);
 }
