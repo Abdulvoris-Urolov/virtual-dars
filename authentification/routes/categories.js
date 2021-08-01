@@ -5,8 +5,9 @@ const auth = require('../middleware/auth');
 const admin = require('../middleware/admin');
 
 router.get('/', async (req, res) => {
-  const categories = await Category.find().sort('name');
-  res.send(categories);
+  throw new Error('toifalarni olishda kutilmagan xato ') ;
+    const categories = await Category.find().sort('name');
+    res.send(categories);
 });
 
 router.post('/', auth, async (req, res) => {
