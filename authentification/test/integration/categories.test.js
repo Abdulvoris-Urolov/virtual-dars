@@ -3,6 +3,7 @@ const request = require('supertest');
 let server;
 const {Category} = require('../../models/category');
 const { User } = require('../../models/user')
+const mongoose = require('mongoose');
 
 describe('/api/categories', () =>{
     beforeEach(() =>{
@@ -36,8 +37,13 @@ describe('/api/categories', () =>{
         });
 
         it('should return 404 if invalid id is given', async () => {
-
             const response = await request(server).get('/api/categories/456');
+            expect(response.status).toBe(404);
+        });
+
+        it('should return 404 if no category with passed id is exits', async () => {
+            const categoryId = mongoose.Types.ObjectId();
+            const response = await request(server).get('/api/categories/' + categoryId);
             expect(response.status).toBe(404);
         });
     });
@@ -92,6 +98,37 @@ describe('/api/categories', () =>{
     });
 
     describe('put /:id', () => {
-        
+        let token;
+        let name;
+
+        // testlar uchun ishlatiladigan funktsiyani bu yerda oldindan 
+        // aniqlab olamiz va uni har bir test ichida alohida chaqiramiz
+        const execute = async () => {
+            return await request(server)
+                .put('/api/categories')
+                .set('x-auth-token', token)
+                .send({ name });
+        }
+
+        beforeEach(() => {
+            token = new User().generateAuthToken();
+            name = 'dasturlash';
+        });
+
+        it('should  .....', () => {
+
+        });
+
+        it('should return 400 if category name is less than 3 characters', async () => {
+            name = '12';
+            const res = await execute();
+            expect(res.status).toBe(404);
+        });
+
+        it('should return 400 if category name is more than 50 characters', async () => {
+            name = new Array(52).join('c');
+            const res = await execute();
+            expect(res.status).toBe(404);
+        });
     });
 });
