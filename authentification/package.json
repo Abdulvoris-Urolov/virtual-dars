@@ -1,10 +1,10 @@
 {
   "name": "virtualdars",
   "version": "1.1.1",
-  "description": "14-Topshiriq",
+  "description": "virtual-dars",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "keywords": [
     "virtualdars",
@@ -26,5 +26,9 @@
     "mongoose": "^5.13.5",
     "winston": "^3.3.3",
     "winston-mongodb": "^5.0.7"
+  },
+  "devDependencies": {
+    "jest": "^27.0.6",
+    "supertest": "^6.1.4"
   }
 }

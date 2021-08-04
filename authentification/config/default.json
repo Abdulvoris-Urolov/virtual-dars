@@ -1,3 +1,4 @@
 {
-    "jwtPrivateKey": "setBuyrug`iIwlamaganiUchunShuYerdaKiritdim"
+    "jwtPrivateKey": "setBuyrug`iIwlamaganiUchunShuYerdaKiritdim",
+    "db": "mongodb://localhost/virtualdars"
 }
